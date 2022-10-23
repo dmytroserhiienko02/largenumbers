@@ -19,8 +19,13 @@ func findNumber(n *big.Int, r *big.Int) {
 
 func main() {
 	for keyLength := 8; keyLength <= 4096; keyLength *= 2 {
+		i, e := big.NewInt(2), big.NewInt(int64(keyLength))
+		amount := i.Exp(i, e, nil)
+		fmt.Printf("keyLength = %d \namount = %d \n\n", keyLength, amount)
+
+	}
+	for keyLength := 8; keyLength <= 4096; keyLength *= 2 {
 		number := new(big.Int).Exp(big.NewInt(2), big.NewInt(int64(keyLength)), nil)
-		fmt.Printf("keyLength = %d\n", keyLength)
 		randNumber := new(big.Int)
 		randNumber = randNumber.Rand(rand.New(rand.NewSource(21)), number)
 		fmt.Printf("randNumber = %X\n", randNumber)
